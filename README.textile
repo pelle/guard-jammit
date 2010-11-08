@@ -1,0 +1,19 @@
+h1. Guard Jammit Plug-in
+
+Let you configure a Guard that will run jammit whenever a javascript or stylesheet is updated.
+
+h2. Quick Start
+
+Edit the Gemfile for it to looks like:
+
+bc. source "http://rubygems.org"
+gem 'guard-jammit'
+
+You can now download missing gems and initialize the guard
+
+bc. $ bundle install
+$ guard init
+$ guard init jammit
+$ guard
+
+

@@ -1,11 +1,12 @@
 require 'guard'
 require 'guard/guard'
-
+require 'jammit'
 module Guard
-  class GuardJammit < Guard
+  class Jammit < Guard
 
     def initialize(watchers = [], options = {})
       super
+      
       # init stuff here, thx!
     end
 
@@ -45,7 +46,10 @@ module Guard
     end
     
     def jammit
-      Jammit.packager.precache_all
+      ::Jammit.load_configuration ::Jammit::DEFAULT_CONFIG_PATH
+      puts "Jamming"
+      ::Jammit.packager.force = true
+      ::Jammit.packager.precache_all
       true
     end
 
