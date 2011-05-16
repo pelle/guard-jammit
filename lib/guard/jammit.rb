@@ -1,13 +1,15 @@
 require 'guard'
 require 'guard/guard'
 require 'jammit'
+
 module Guard
   class Jammit < Guard
+    @options = {}
 
     def initialize(watchers = [], options = {})
       super
-      
-      # init stuff here, thx!
+
+      @options.merge(options)
     end
 
     # ================
@@ -44,12 +46,12 @@ module Guard
     def run_on_change(paths)
       jammit
     end
-    
+
     def jammit
       ::Jammit.load_configuration ::Jammit::DEFAULT_CONFIG_PATH
       puts "Jamming"
       ::Jammit.packager.force = true
-      ::Jammit.packager.precache_all
+      ::Jammit.packager.precache_all(@options[:output_folder], @options[:base_url])
       true
     end
 
