@@ -9,6 +9,7 @@ module Guard
       super
       
       # init stuff here, thx!
+      ::Jammit.load_configuration ::Jammit::DEFAULT_CONFIG_PATH
     end
 
     # ================
@@ -48,8 +49,8 @@ module Guard
     
     def jammit
       ensure_rails_env!
-      ::Jammit.load_configuration ::Jammit::DEFAULT_CONFIG_PATH
-      puts "Jamming"
+      ::Jammit.reload!
+      puts "Jamming assets..."
       ::Jammit.packager.force = true
       ::Jammit.packager.precache_all
       true
