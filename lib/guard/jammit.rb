@@ -1,6 +1,7 @@
 require 'guard'
 require 'guard/guard'
 require 'jammit'
+
 module Guard
   class Jammit < Guard
 
@@ -46,6 +47,7 @@ module Guard
     end
     
     def jammit
+      ensure_rails_env!
       ::Jammit.load_configuration ::Jammit::DEFAULT_CONFIG_PATH
       puts "Jamming"
       ::Jammit.packager.force = true
@@ -53,5 +55,11 @@ module Guard
       true
     end
 
+    private
+    def ensure_rails_env!
+      if !defined?(::Rails) || !::Rails.respond_to?(:env)
+        require 'rails'
+      end
+    end
   end
 end
