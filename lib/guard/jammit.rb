@@ -47,10 +47,10 @@ module Guard
     def jammit
       begin
         ::Jammit.load_configuration @options[:config] || ::Jammit::DEFAULT_CONFIG_PATH
+        ::Guard::UI.info("Jamming #{@options[:config]}")
+        ::Guard::Notifier.notify("Jamming #{@options[:config]}", :title => 'Jammit')
         ::Jammit.packager.force = true
         ::Jammit.packager.precache_all
-        ::Guard::UI.info('Jamming')
-        ::Guard::Notifier.notify('Jamming', :title => 'Jammit')
         true
       rescue Exception => e
         ::Guard::UI.error("Jammit failed (#{e})")
