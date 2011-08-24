@@ -6,8 +6,7 @@ module Guard
 
     def initialize(watchers = [], options = {})
       super
-      
-      # init stuff here, thx!
+      @options.merge(options)
     end
 
     # ================
@@ -44,13 +43,20 @@ module Guard
     def run_on_change(paths)
       jammit
     end
-    
+
     def jammit
-      ::Jammit.load_configuration ::Jammit::DEFAULT_CONFIG_PATH
-      puts "Jamming"
-      ::Jammit.packager.force = false
-      ::Jammit.packager.precache_all
-      true
+      begin
+        ::Jammit.load_configuration @options[:config] || ::Jammit::DEFAULT_CONFIG_PATH
+        ::Guard::UI.info("Jamming #{@options[:config]}")
+        ::Guard::Notifier.notify("Jamming #{@options[:config]}", :title => 'Jammit')
+        ::Jammit.packager.force = false
+        ::Jammit.packager.precache_all
+        true
+      rescue Exception => e
+        ::Guard::UI.error("Jammit failed (#{e})")
+        ::Guard::Notifier.notify('Jammit failed', :title => 'Jammit', :image => :failed)
+        false
+      end
     end
 
   end
