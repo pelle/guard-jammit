@@ -133,7 +133,7 @@ describe Guard::Jammit do
     end
   end
 
-  describe '#run_on_change' do
+  describe '#run_on_changes' do
     before { guard.stub(:jammit) }
 
     it 'starts the packager' do

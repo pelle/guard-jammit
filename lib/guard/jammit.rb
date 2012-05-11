@@ -64,7 +64,7 @@ module Guard
     # @param [Array<String>] paths the changed paths and files
     # @raise [:task_has_failed] when run_on_change has failed
     #
-    def run_on_change(paths)
+    def run_on_changes(paths)
       jammit
     end
 
