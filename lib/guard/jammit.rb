@@ -76,8 +76,8 @@ module Guard
 
         ::Jammit.package! @options
 
-        ::Guard::UI.info 'Jammit successfull packaged the assets.'
-        ::Guard::Notifier.notify('Jammit successfull packaged the assets.', :title => 'Jammit') if @options[:notification] && !@options[:hide_success]
+        ::Guard::UI.info 'Jammit successfully packaged the assets.'
+        ::Guard::Notifier.notify('Jammit successfully packaged the assets.', :title => 'Jammit') if @options[:notification] && !@options[:hide_success]
 
       rescue Exception => e
         ::Guard::UI.error("Jammit failed to package the assets: #{e.message}")
