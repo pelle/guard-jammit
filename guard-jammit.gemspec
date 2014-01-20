@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.name        = 'guard-jammit'
   s.version     = Guard::JammitVersion::VERSION
   s.authors     = ['Pelle Braendgaard', 'Michael Kessler']
-  s.email       = ['pelle@stakeventures.com', 'michi@netzpiraten.ch']
+  s.email       = ['pelle@stakeventures.com', 'michi@flinkfinger.com']
   s.homepage    = %q{http://github.com/guard/guard-jammit}
   s.summary     = %q{Guard plugin for Jammit}
   s.description = %q{Watches your assets to automatically package them using Jammit.}
