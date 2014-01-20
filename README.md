@@ -2,7 +2,7 @@
 
 Guard::Jammit watches your assets to automatically package them using [Jammit](http://documentcloud.github.com/jammit/).
 
-Tested on MRI Ruby 1.8.7, 1.9.2, 1.9.3, REE and the latest versions of JRuby and Rubinius.
+Tested on MRI Ruby 1.9.3, 2.0.0, 2.0.1 and the latest versions of JRuby and Rubinius.
 
 If you have any questions please join us on our [Google group](http://groups.google.com/group/guard-dev) or on `#guard`
 (irc.freenode.net).
