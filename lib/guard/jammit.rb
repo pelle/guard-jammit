@@ -1,5 +1,5 @@
 require 'guard'
-require 'guard/guard'
+require 'guard/plugin'
 require 'jammit'
 
 module Guard
@@ -7,7 +7,7 @@ module Guard
   # The Jammit Guard that gets notifications about the following
   # Guard events: `start`, `stop`, `reload`, `run_all` and `run_on_change`.
   #
-  class Jammit < Guard
+  class Jammit < Plugin
 
     DEFAULT_OPTIONS = {
         :config_path      => ::Jammit::DEFAULT_CONFIG_PATH,
@@ -34,9 +34,9 @@ module Guard
     # @option options [Boolean] :notification show notifications
     # @option options [Boolean] :hide_success hide success message notification
     #
-    def initialize(watchers = [], options = {})
+    def initialize(options = {})
       options = DEFAULT_OPTIONS.merge(options)
-      super(watchers, options)
+      super
     end
 
     # Gets called once when Guard starts.
