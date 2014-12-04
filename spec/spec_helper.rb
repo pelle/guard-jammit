@@ -13,6 +13,6 @@ RSpec.configure do |config|
   end
 
   config.after(:each) do
-    # ENV["GUARD_ENV"] = nil
+    ENV["GUARD_ENV"] = nil
   end
 end
