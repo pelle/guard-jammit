@@ -7,7 +7,7 @@ module Guard
   # The Jammit Guard that gets notifications about the following
   # Guard events: `start`, `stop`, `reload`, `run_all` and `run_on_change`.
   #
-  class Jammit < Guard
+  class Jammit < Plugin
 
     DEFAULT_OPTIONS = {
         :config_path      => ::Jammit::DEFAULT_CONFIG_PATH,
