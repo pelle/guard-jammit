@@ -1,5 +1,5 @@
 require 'guard'
-require 'guard/guard'
+require 'guard/plugin'
 require 'jammit'
 
 module Guard
@@ -34,9 +34,9 @@ module Guard
     # @option options [Boolean] :notification show notifications
     # @option options [Boolean] :hide_success hide success message notification
     #
-    def initialize(watchers = [], options = {})
+    def initialize(options = {})
       options = DEFAULT_OPTIONS.merge(options)
-      super(watchers, options)
+      super(options)
     end
 
     # Gets called once when Guard starts.
