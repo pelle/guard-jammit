@@ -3,7 +3,7 @@ require 'guard/jammit'
 
 RSpec.configure do |config|
 
-  config.color_enabled = true
+  config.color = true
   config.filter_run :focus => true
   config.run_all_when_everything_filtered = true
 
@@ -13,6 +13,6 @@ RSpec.configure do |config|
   end
 
   config.after(:each) do
-    ENV["GUARD_ENV"] = nil
+    # ENV["GUARD_ENV"] = nil
   end
 end
