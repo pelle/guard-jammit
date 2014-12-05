@@ -36,7 +36,7 @@ module Guard
     #
     def initialize(options = {})
       options = DEFAULT_OPTIONS.merge(options)
-      super(options)
+      super
     end
 
     # Gets called once when Guard starts.

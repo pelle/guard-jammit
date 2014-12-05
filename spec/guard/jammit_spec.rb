@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Guard::Jammit do
-
   let(:guard)    { Guard::Jammit.new }
   let(:defaults) { Guard::Jammit::DEFAULT_OPTIONS }
 
