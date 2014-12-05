@@ -1,5 +1,13 @@
 require 'spec_helper'
 
+module Guard
+  class Plugin
+    def initialize(options)
+      @options = options
+    end
+  end
+end
+
 describe Guard::Jammit do
   let(:guard)    { Guard::Jammit.new }
   let(:defaults) { Guard::Jammit::DEFAULT_OPTIONS }
@@ -48,15 +56,15 @@ describe Guard::Jammit do
     end
 
     context 'with other options than the default ones' do
-      let(:guard) { Guard::Jammit.new(nil, { :config_path      => 'assets.prod.yml',
-                                             :output_folder    => '/tmp',
-                                             :base_url         => 'http://www.site.com',
-                                             :public_root      => 'htdocs',
-                                             :force            => true,
-                                             :package_names    => [:admin],
-                                             :package_on_start => false,
-                                             :notification     => false,
-                                             :hide_success     => true }) }
+      let(:guard) { Guard::Jammit.new(:config_path      => 'assets.prod.yml',
+                                      :output_folder    => '/tmp',
+                                      :base_url         => 'http://www.site.com',
+                                      :public_root      => 'htdocs',
+                                      :force            => true,
+                                      :package_names    => [:admin],
+                                      :package_on_start => false,
+                                      :notification     => false,
+                                      :hide_success     => true) }
 
       it 'sets the :config_path option' do
         guard.options[:config_path].should eql 'assets.prod.yml'
@@ -105,7 +113,7 @@ describe Guard::Jammit do
     end
 
     context 'with :package_on_start on' do
-      let(:guard) { Guard::Jammit.new(nil, { :package_on_start => true }) }
+      let(:guard) { Guard::Jammit.new(:package_on_start => true) }
 
       it 'starts the packager' do
         guard.should_receive(:jammit)
@@ -114,7 +122,7 @@ describe Guard::Jammit do
     end
 
     context 'with :package_on_start off' do
-      let(:guard) { Guard::Jammit.new(nil, { :package_on_start => false }) }
+      let(:guard) { Guard::Jammit.new(:package_on_start => false) }
 
       it 'starts the packager' do
         guard.should_not_receive(:jammit)
@@ -163,7 +171,7 @@ describe Guard::Jammit do
 
       context 'with notifications' do
         context 'without hiding the success notification' do
-          let(:guard) { Guard::Jammit.new(nil, { :notification => true, :hide_success => false }) }
+          let(:guard) { Guard::Jammit.new(:notification => true, :hide_success => false) }
 
           it 'shows the success notification' do
             Guard::Notifier.should_receive(:notify).with('Jammit successfully packaged the assets.', :title => 'Jammit')
@@ -172,7 +180,7 @@ describe Guard::Jammit do
         end
 
         context 'with hiding the success notification' do
-          let(:guard) { Guard::Jammit.new(nil, { :notification => true, :hide_success => true }) }
+          let(:guard) { Guard::Jammit.new(:notification => true, :hide_success => true) }
 
           it 'does not show the success notification' do
             Guard::Notifier.should_not_receive(:notify)
@@ -182,7 +190,7 @@ describe Guard::Jammit do
       end
 
       context 'without notifications' do
-        let(:guard) { Guard::Jammit.new(nil, { :notification => false }) }
+        let(:guard) { Guard::Jammit.new(:notification => false) }
 
         it 'does not show the success notification' do
           Guard::Notifier.should_not_receive(:notify)
@@ -200,7 +208,7 @@ describe Guard::Jammit do
       end
 
       context 'with notifications' do
-        let(:guard) { Guard::Jammit.new(nil, { :notification => true }) }
+        let(:guard) { Guard::Jammit.new(:notification => true) }
 
         it 'shows the failure notification' do
           Guard::Notifier.should_receive(:notify).with('Jammit failed to package the assets.', :title => 'Jammit', :image => :failed)
@@ -209,7 +217,7 @@ describe Guard::Jammit do
       end
 
       context 'without notifications' do
-        let(:guard) { Guard::Jammit.new(nil, { :notification => false }) }
+        let(:guard) { Guard::Jammit.new(:notification => false) }
 
         it 'does not show the failure notification' do
           Guard::Notifier.should_not_receive(:notify)
