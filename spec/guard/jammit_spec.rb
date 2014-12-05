@@ -56,15 +56,17 @@ describe Guard::Jammit do
     end
 
     context 'with other options than the default ones' do
-      let(:guard) { Guard::Jammit.new(:config_path      => 'assets.prod.yml',
-                                      :output_folder    => '/tmp',
-                                      :base_url         => 'http://www.site.com',
-                                      :public_root      => 'htdocs',
-                                      :force            => true,
-                                      :package_names    => [:admin],
-                                      :package_on_start => false,
-                                      :notification     => false,
-                                      :hide_success     => true) }
+      let(:guard) do
+        Guard::Jammit.new(config_path: 'assets.prod.yml',
+                          output_folder: '/tmp',
+                          base_url: 'http://www.site.com',
+                          public_root: 'htdocs',
+                          force: true,
+                          package_names: [:admin],
+                          package_on_start: false,
+                          notification: false,
+                          hide_success: true)
+      end
 
       it 'sets the :config_path option' do
         expect(guard.options[:config_path]).to eql 'assets.prod.yml'
@@ -113,7 +115,7 @@ describe Guard::Jammit do
     end
 
     context 'with :package_on_start on' do
-      let(:guard) { Guard::Jammit.new(:package_on_start => true) }
+      let(:guard) { Guard::Jammit.new(package_on_start: true) }
 
       it 'starts the packager' do
         expect(guard).to receive(:jammit)
@@ -122,7 +124,7 @@ describe Guard::Jammit do
     end
 
     context 'with :package_on_start off' do
-      let(:guard) { Guard::Jammit.new(:package_on_start => false) }
+      let(:guard) { Guard::Jammit.new(package_on_start: false) }
 
       it 'starts the packager' do
         expect(guard).not_to receive(:jammit)
@@ -171,16 +173,16 @@ describe Guard::Jammit do
 
       context 'with notifications' do
         context 'without hiding the success notification' do
-          let(:guard) { Guard::Jammit.new(:notification => true, :hide_success => false) }
+          let(:guard) { Guard::Jammit.new(notification: true, hide_success: false) }
 
           it 'shows the success notification' do
-            expect(Guard::Notifier).to receive(:notify).with('Jammit successfully packaged the assets.', :title => 'Jammit')
+            expect(Guard::Notifier).to receive(:notify).with('Jammit successfully packaged the assets.', title: 'Jammit')
             guard.jammit
           end
         end
 
         context 'with hiding the success notification' do
-          let(:guard) { Guard::Jammit.new(:notification => true, :hide_success => true) }
+          let(:guard) { Guard::Jammit.new(notification: true, hide_success: true) }
 
           it 'does not show the success notification' do
             expect(Guard::Notifier).not_to receive(:notify)
@@ -190,7 +192,7 @@ describe Guard::Jammit do
       end
 
       context 'without notifications' do
-        let(:guard) { Guard::Jammit.new(:notification => false) }
+        let(:guard) { Guard::Jammit.new(notification: false) }
 
         it 'does not show the success notification' do
           expect(Guard::Notifier).not_to receive(:notify)
@@ -208,16 +210,16 @@ describe Guard::Jammit do
       end
 
       context 'with notifications' do
-        let(:guard) { Guard::Jammit.new(:notification => true) }
+        let(:guard) { Guard::Jammit.new(notification: true) }
 
         it 'shows the failure notification' do
-          expect(Guard::Notifier).to receive(:notify).with('Jammit failed to package the assets.', :title => 'Jammit', :image => :failed)
+          expect(Guard::Notifier).to receive(:notify).with('Jammit failed to package the assets.', title: 'Jammit', image: :failed)
           guard.jammit
         end
       end
 
       context 'without notifications' do
-        let(:guard) { Guard::Jammit.new(:notification => false) }
+        let(:guard) { Guard::Jammit.new(notification: false) }
 
         it 'does not show the failure notification' do
           expect(Guard::Notifier).not_to receive(:notify)

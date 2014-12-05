@@ -1,4 +1,4 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
 gemspec
 
@@ -7,6 +7,8 @@ unless ENV['TRAVIS']
   gem 'yard', require: false
   gem 'pry', require: false
   gem 'guard-rspec', require: false
+  gem 'guard-rubocop', require: false
+  gem 'rubocop', require: false
 end
 
 group :development do

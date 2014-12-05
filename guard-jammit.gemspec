@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-$:.push File.expand_path('../lib', __FILE__)
+$LOAD_PATH.push File.expand_path('../lib', __FILE__)
 require 'guard/jammit/version'
 
 Gem::Specification.new do |s|
@@ -7,9 +7,9 @@ Gem::Specification.new do |s|
   s.version     = Guard::JammitVersion::VERSION
   s.authors     = ['Pelle Braendgaard', 'Michael Kessler']
   s.email       = ['pelle@stakeventures.com', 'michi@flinkfinger.com']
-  s.homepage    = %q{http://github.com/guard/guard-jammit}
-  s.summary     = %q{Guard plugin for Jammit}
-  s.description = %q{Watches your assets to automatically package them using Jammit.}
+  s.homepage    = 'http://github.com/guard/guard-jammit'
+  s.summary     = 'Guard plugin for Jammit'
+  s.description = 'Watches your assets to automatically package them using Jammit.'
 
   s.required_rubygems_version = '>= 1.3.6'
   s.rubyforge_project = 'guard-jammit'
@@ -19,6 +19,6 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'bundler'
 
-  s.files        = Dir.glob('{lib}/**/*') + %w[LICENSE README.md]
+  s.files        = Dir.glob('{lib}/**/*') + %w(LICENSE README.md)
   s.require_path = 'lib'
 end

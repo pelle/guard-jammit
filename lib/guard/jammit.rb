@@ -3,22 +3,20 @@ require 'guard/plugin'
 require 'jammit'
 
 module Guard
-
   # The Jammit Guard that gets notifications about the following
   # Guard events: `start`, `stop`, `reload`, `run_all` and `run_on_change`.
   #
   class Jammit < Plugin
-
     DEFAULT_OPTIONS = {
-        :config_path      => ::Jammit::DEFAULT_CONFIG_PATH,
-        :output_folder    => nil,
-        :base_url         => nil,
-        :public_root      => nil,
-        :force            => false,
-        :package_names    => nil,
-        :package_on_start => true,
-        :notification     => true,
-        :hide_success     => false
+      config_path: ::Jammit::DEFAULT_CONFIG_PATH,
+      output_folder: nil,
+      base_url: nil,
+      public_root: nil,
+      force: false,
+      package_names: nil,
+      package_on_start: true,
+      notification: true,
+      hide_success: false
     }
 
     # Initialize Guard::Jammit.
@@ -64,25 +62,23 @@ module Guard
     # @param [Array<String>] paths the changed paths and files
     # @raise [:task_has_failed] when run_on_change has failed
     #
-    def run_on_changes(paths)
+    def run_on_changes(_paths)
       jammit
     end
 
     # Runs Jammit to package the assets
     #
     def jammit
-      begin
-        Thread.current[:jammit_packager] = nil
+      Thread.current[:jammit_packager] = nil
 
-        ::Jammit.package! @options
+      ::Jammit.package! @options
 
-        ::Guard::UI.info 'Jammit successfully packaged the assets.'
-        ::Guard::Notifier.notify('Jammit successfully packaged the assets.', :title => 'Jammit') if @options[:notification] && !@options[:hide_success]
+      ::Guard::UI.info 'Jammit successfully packaged the assets.'
+      ::Guard::Notifier.notify('Jammit successfully packaged the assets.', title: 'Jammit') if @options[:notification] && !@options[:hide_success]
 
-      rescue Exception => e
-        ::Guard::UI.error("Jammit failed to package the assets: #{e.message}")
-        ::Guard::Notifier.notify('Jammit failed to package the assets.', :title => 'Jammit', :image => :failed) if @options[:notification]
-      end
+    rescue RuntimeError => e
+      ::Guard::UI.error("Jammit failed to package the assets: #{e.message}")
+      ::Guard::Notifier.notify('Jammit failed to package the assets.', title: 'Jammit', image: :failed) if @options[:notification]
     end
 
     private
@@ -90,10 +86,7 @@ module Guard
     # Ensures that Rails env is available when Rails is only partially loaded
     #
     def ensure_rails_env!
-      if defined?(::Rails) && !::Rails.respond_to?(:env)
-        require 'rails'
-      end
+      require 'rails' if defined?(::Rails) && !::Rails.respond_to?(:env)
     end
-
   end
 end
