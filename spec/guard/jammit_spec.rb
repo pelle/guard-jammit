@@ -225,7 +225,5 @@ describe Guard::Jammit do
         end
       end
     end
-
   end
-
 end
