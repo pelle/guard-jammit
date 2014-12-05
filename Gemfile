@@ -5,7 +5,6 @@ gemspec
 unless ENV['TRAVIS']
   gem 'redcarpet', require: false
   gem 'yard', require: false
-  gem 'transpec', require: false
   gem 'pry', require: false
   gem 'guard-rspec', require: false
 end
