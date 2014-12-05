@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'guard/jammit'
 
 module Guard
   class Plugin
@@ -8,7 +8,7 @@ module Guard
   end
 end
 
-describe Guard::Jammit do
+RSpec.describe Guard::Jammit do
   let(:guard)    { Guard::Jammit.new }
   let(:defaults) { Guard::Jammit::DEFAULT_OPTIONS }
 
@@ -19,7 +19,8 @@ describe Guard::Jammit do
   describe '#initialize' do
     context 'when no options are provided' do
       it 'sets a default :config_path option' do
-        expect(guard.options[:config_path]).to eql "#{ @project_path }/config/assets.yml"
+        expected = File.join(Dir.pwd, 'config/assets.yml')
+        expect(guard.options[:config_path]).to eql expected
       end
 
       it 'sets a default :output_folder option' do

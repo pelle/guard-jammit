@@ -1,6 +1,6 @@
-require 'guard'
-require 'guard/plugin'
 require 'jammit'
+
+require 'guard/plugin'
 
 module Guard
   # The Jammit Guard that gets notifications about the following
