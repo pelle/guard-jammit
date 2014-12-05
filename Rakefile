@@ -5,6 +5,8 @@ require 'rspec/core/rake_task'
 RSpec::Core::RakeTask.new(:spec)
 task :default => :spec
 
+require 'yaml'
+
 namespace(:spec) do
   desc "Run all specs on multiple ruby versions (requires rvm)"
   task(:portability) do
@@ -19,6 +21,7 @@ namespace(:spec) do
     travis_options['rvm'].each do |version|
       system <<-BASH
         bash -c 'source ~/.rvm/scripts/rvm;
+                 set -e
                  rvm #{version};
                  ruby_version_string_size=`ruby -v | wc -m`
                  echo;

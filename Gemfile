@@ -3,8 +3,15 @@ source "https://rubygems.org"
 gemspec
 
 unless ENV['TRAVIS']
-  gem 'redcarpet'
-  gem 'yard'
+  gem 'redcarpet', require: false
+  gem 'yard', require: false
+  gem 'pry', require: false
+  gem 'guard-rspec', require: false
+end
+
+group :development do
+  gem 'rake', require: false
+  gem 'rspec', require: false
 end
 
 platforms :rbx do

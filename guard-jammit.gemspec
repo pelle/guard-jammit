@@ -18,11 +18,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'jammit'
 
   s.add_development_dependency 'bundler'
-  s.add_development_dependency 'guard-rspec'
-  s.add_development_dependency 'rspec'
-  s.add_development_dependency 'yard'
-  s.add_development_dependency 'pry'
-  s.add_development_dependency 'rake'
 
   s.files        = Dir.glob('{lib}/**/*') + %w[LICENSE README.md]
   s.require_path = 'lib'
