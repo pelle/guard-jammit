@@ -1,4 +1,4 @@
 guard 'jammit' do
-  watch('^public/javascripts/(.*)\.js')
-  watch('^public/stylesheets/(.*)\.css')
+  watch(%r{^public/javascripts/(.*)\.js$})
+  watch(%r{^public/stylesheets/(.*)\.css$})
 end
